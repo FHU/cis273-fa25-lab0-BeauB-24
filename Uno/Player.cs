@@ -1,26 +1,35 @@
 ﻿namespace Uno;
 
+
 public class Player
 {
-    public string Name { get; set; }
-
-    public List<Card> Hand { get; set; }
+   public string Name { get; set; } = "";
 
 
-    public bool HasPlayableCard(Card card)
-    {
-        return true;
-    }
-
-    public Card GetFirstPlayableCard(Card card)
-    {
-        return null;
-    }
+   public List<Card> Hand { get; set; } = new List<Card>();
 
 
-    public Color MostCommonColor()
-    {
-        return Color.Red;
-    }
+
+
+   public bool HasPlayableCard(Card card)
+   {
+       return Hand.Any(c => Card.PlaysOn(c, card));
+   }
+
+
+   public Card? GetFirstPlayableCard(Card card)
+   {
+       return Hand.FirstOrDefault(c => Card.PlaysOn(c, card));
+   }
+
+
+
+
+   public Color MostCommonColor()
+   {
+       return Color.Red;
+   }
+
 
 }
+
